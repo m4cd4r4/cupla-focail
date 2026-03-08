@@ -3,6 +3,7 @@ export const config = { runtime: 'edge' };
 
 import { DICTIONARY_ENTRIES } from '../src/data/irish-dictionary';
 import { search, categoryCounts, wordOfTheDay, findById } from '../src/search';
+import type { DictionaryCategory } from '../src/data/irish-dictionary';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -46,5 +47,6 @@ export default function handler(request: Request): Response {
   const cat   = url.searchParams.get('category') ?? '';
   const limit = Math.min(parseInt(url.searchParams.get('limit') ?? '20', 10) || 20, 200);
 
-  return json(search(DICTIONARY_ENTRIES, q, { category: (cat as Parameters<typeof search>[2]['category']), limit }));
+  const category = (cat || null) as DictionaryCategory | null;
+  return json(search(DICTIONARY_ENTRIES, q, { category, limit }));
 }
