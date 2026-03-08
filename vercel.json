@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/search.ts": {
-      "includeFiles": "api/dictionary.json"
-    }
-  },
   "rewrites": [
     { "source": "/api/word-of-the-day", "destination": "/api/search" },
     { "source": "/api/entry/:id",        "destination": "/api/search" },
