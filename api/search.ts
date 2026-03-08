@@ -1,9 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-// Use require() so Vercel's bundler resolves without needing .js extensions
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { DICTIONARY_ENTRIES } = require('../src/data/irish-dictionary');
-const { search, categoryCounts, wordOfTheDay, findById } = require('../src/search');
-/* eslint-enable @typescript-eslint/no-require-imports */
+// .js extensions required for nodenext moduleResolution — esbuild resolves these to .ts files
+import { DICTIONARY_ENTRIES } from '../src/data/irish-dictionary.js';
+import { search, categoryCounts, wordOfTheDay, findById } from '../src/search.js';
 
 function cors(res: VercelResponse): VercelResponse {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,7 +23,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
   // GET /api/word-of-the-day
   if (path === '/api/word-of-the-day') {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     cors(res).status(200).json({ entry: wordOfTheDay(DICTIONARY_ENTRIES) });
     return;
   }
@@ -34,7 +31,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   const entryMatch = path.match(/^\/api\/entry\/(.+)$/);
   if (entryMatch) {
     const id = decodeURIComponent(entryMatch[1]);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     const entry = findById(DICTIONARY_ENTRIES, id);
     if (!entry) { cors(res).status(404).json({ error: 'Not found' }); return; }
     cors(res).status(200).json({ entry });
@@ -44,7 +40,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   // GET /api/categories
   if (path === '/api/categories') {
     cors(res).status(200).json({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       categories: categoryCounts(DICTIONARY_ENTRIES),
       total: DICTIONARY_ENTRIES.length,
     });
@@ -56,7 +51,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   const cat   = (req.query['category'] as string) ?? '';
   const limit = Math.min(parseInt((req.query['limit'] as string) ?? '20', 10) || 20, 200);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const result = search(DICTIONARY_ENTRIES, q, { category: cat || null, limit });
   cors(res).status(200).json(result);
 }

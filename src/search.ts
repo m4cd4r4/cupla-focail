@@ -1,4 +1,4 @@
-import type { DictionaryEntry, DictionaryCategory } from './data/irish-dictionary';
+import type { DictionaryEntry, DictionaryCategory } from './data/irish-dictionary.js';
 
 export interface SearchOptions {
   /** Category to filter by. Null = all categories. */
