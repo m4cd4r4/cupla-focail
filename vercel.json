@@ -1,0 +1,25 @@
+{
+  "rewrites": [
+    { "source": "/api/word-of-the-day", "destination": "/api/search" },
+    { "source": "/api/entry/:id",        "destination": "/api/search" },
+    { "source": "/api/categories",       "destination": "/api/search" },
+    { "source": "/api/search",           "destination": "/api/search" },
+    { "source": "/((?!api/).*)",         "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/widget.js",
+      "headers": [
+        { "key": "Cache-Control",               "value": "public, max-age=3600, stale-while-revalidate=86400" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/embed",
+      "headers": [
+        { "key": "X-Frame-Options",             "value": "ALLOWALL" },
+        { "key": "Content-Security-Policy",     "value": "frame-ancestors *" }
+      ]
+    }
+  ]
+}
