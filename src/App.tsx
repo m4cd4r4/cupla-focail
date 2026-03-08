@@ -66,13 +66,13 @@ export function App() {
               Irish-English Dictionary
             </h2>
             <p className="text-gray-400 text-lg">
-              2,003 curated entries · Fada-insensitive search · Free &amp; open source
+              27,755 entries · Fada-insensitive search · Free &amp; open source
             </p>
           </div>
           <SearchInput value={query} onChange={setQuery} autoFocus />
           {loaded && (
             <p className="text-center text-xs text-gray-600 mt-3">
-              {entries.length.toLocaleString()} entries across 22 categories
+              {entries.length.toLocaleString()} entries across 23 categories
             </p>
           )}
         </div>
@@ -108,7 +108,7 @@ export function App() {
               <p className="text-sm text-gray-500" aria-live="polite">
                 {results.total === 0
                   ? 'No results'
-                  : `${results.total} result${results.total === 1 ? '' : 's'}${results.total > 60 ? ' · showing first 60' : ''}`}
+                  : `${results.total.toLocaleString()} result${results.total === 1 ? '' : 's'}${results.total > 60 ? ' · showing first 60' : ''}`}
               </p>
               {(query || category) && (
                 <button
@@ -165,7 +165,7 @@ export function App() {
       <footer className="border-t border-white/8 bg-dark-950/50">
         <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-sm text-gray-600">
-            🍀 Foclóir — MIT License · 2003 curated entries
+            🍀 Foclóir — MIT License · 27,755 entries
           </p>
           <div className="flex items-center gap-4 text-sm">
             <a href="https://github.com/m4cd4r4/irish-dictionary-app" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-400 transition-colors">GitHub</a>

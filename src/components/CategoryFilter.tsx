@@ -23,6 +23,7 @@ const CATEGORIES: Array<{ key: DictionaryCategory; emoji: string; label: string 
   { key: 'clothing',     emoji: '👗',     label: 'Clothing' },
   { key: 'music',        emoji: '🎵',     label: 'Music' },
   { key: 'culture',      emoji: '🍀',     label: 'Culture' },
+  { key: 'animals',      emoji: '🐾',     label: 'Animals' },
 ];
 
 interface Props {
