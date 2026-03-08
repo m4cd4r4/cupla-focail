@@ -1,76 +1,50 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+// Edge Function — esbuild bundles TypeScript imports at build time, no Node.js fs needed
+export const config = { runtime: 'edge' };
 
-// Load pre-built JSON — __dirname is resolved correctly in Vercel serverless runtime
-const ENTRIES: Entry[] = JSON.parse(
-  readFileSync(join(__dirname, 'dictionary.json'), 'utf-8'),
-) as Entry[];
+import { DICTIONARY_ENTRIES } from '../src/data/irish-dictionary';
+import { search, categoryCounts, wordOfTheDay, findById } from '../src/search';
 
-interface Entry {
-  id: string; irish: string; english: string; englishAlt?: string[];
-  partOfSpeech: string; category: string; gender?: string; searchTerms: string[];
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=3600',
+};
+
+function json(data: unknown, status = 200): Response {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
+  });
 }
 
-function normalize(t: string) {
-  return t.toLowerCase().replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
-}
+export default function handler(request: Request): Response {
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: CORS_HEADERS });
+  }
 
-function searchEntries(entries: Entry[], query: string, category: string | null, limit: number) {
-  const q = normalize(query.trim());
-  let pool = category ? entries.filter(e => e.category === category) : entries;
-  if (!q) return { entries: pool.slice(0, limit), total: pool.length, query };
-  const matched = pool.filter(e => e.searchTerms.some(t => t.includes(q)));
-  return { entries: matched.slice(0, limit), total: matched.length, query };
-}
-
-function wordOfTheDay(entries: Entry[]) {
-  const day = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86_400_000);
-  return entries[day % entries.length];
-}
-
-function categoryCounts(entries: Entry[]) {
-  const counts: Record<string, number> = {};
-  for (const e of entries) counts[e.category] = (counts[e.category] ?? 0) + 1;
-  return counts;
-}
-
-function setCors(res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=3600');
-}
-
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  setCors(res);
-
-  if (req.method === 'OPTIONS') { res.status(204).end(); return; }
-
-  const rawUrl = req.url ?? '/api/search';
-  const url = new URL(rawUrl, 'https://focloir.vercel.app');
+  const url = new URL(request.url);
   const path = url.pathname;
 
   if (path === '/api/word-of-the-day') {
-    res.status(200).json({ entry: wordOfTheDay(ENTRIES) });
-    return;
+    return json({ entry: wordOfTheDay(DICTIONARY_ENTRIES) });
   }
 
   const entryMatch = path.match(/^\/api\/entry\/(.+)$/);
   if (entryMatch) {
-    const entry = ENTRIES.find(e => e.id === decodeURIComponent(entryMatch[1]));
-    if (!entry) { res.status(404).json({ error: 'Not found' }); return; }
-    res.status(200).json({ entry });
-    return;
+    const entry = findById(DICTIONARY_ENTRIES, decodeURIComponent(entryMatch[1]));
+    if (!entry) return json({ error: 'Not found' }, 404);
+    return json({ entry });
   }
 
   if (path === '/api/categories') {
-    res.status(200).json({ categories: categoryCounts(ENTRIES), total: ENTRIES.length });
-    return;
+    return json({ categories: categoryCounts(DICTIONARY_ENTRIES), total: DICTIONARY_ENTRIES.length });
   }
 
-  const q     = ((req.query['q']       as string) ?? '').trim();
-  const cat   = (req.query['category'] as string) ?? '';
-  const limit = Math.min(parseInt((req.query['limit'] as string) ?? '20', 10) || 20, 200);
-  res.status(200).json(searchEntries(ENTRIES, q, cat || null, limit));
+  // Default: /api/search
+  const q     = (url.searchParams.get('q') ?? '').trim();
+  const cat   = url.searchParams.get('category') ?? '';
+  const limit = Math.min(parseInt(url.searchParams.get('limit') ?? '20', 10) || 20, 200);
+
+  return json(search(DICTIONARY_ENTRIES, q, { category: (cat as Parameters<typeof search>[2]['category']), limit }));
 }
