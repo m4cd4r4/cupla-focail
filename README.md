@@ -1,8 +1,8 @@
 # Foclóir — Irish-English Dictionary
 
-> **Live:** https://focloir.vercel.app · **API:** https://focloir.vercel.app/api/search
+> **Live:** https://irish-dictionary-app.vercel.app · **API:** https://irish-dictionary-app.vercel.app/api/search
 
-A free, open-source Irish-English dictionary with **2,003 curated entries** across 22 categories. Built to be integrated into Irish language apps, learning tools, and messaging platforms.
+A free, open-source Irish-English dictionary with **27,755 entries** across 23 categories. Built to be integrated into Irish language apps, learning tools, and messaging platforms.
 
 ---
 
@@ -13,7 +13,7 @@ A free, open-source Irish-English dictionary with **2,003 curated entries** acro
 Drop a floating Irish dictionary button onto any web page:
 
 ```html
-<script src="https://focloir.vercel.app/widget.js" defer></script>
+<script src="https://irish-dictionary-app.vercel.app/widget.js" defer></script>
 ```
 
 A 🍀 button appears in the bottom-right corner. Click to open a full dictionary panel.
@@ -22,7 +22,7 @@ A 🍀 button appears in the bottom-right corner. Click to open a full dictionar
 
 ```html
 <script
-  src="https://focloir.vercel.app/widget.js"
+  src="https://irish-dictionary-app.vercel.app/widget.js"
   data-position="bottom-left"
   data-color="#16a34a"
   data-category="greetings"
@@ -44,7 +44,7 @@ Embed the full dictionary UI inside your app:
 
 ```html
 <iframe
-  src="https://focloir.vercel.app/embed"
+  src="https://irish-dictionary-app.vercel.app/embed"
   width="100%"
   height="600"
   style="border:none; border-radius:12px;"
@@ -56,7 +56,7 @@ Embed the full dictionary UI inside your app:
 Pre-select a category:
 
 ```html
-<iframe src="https://focloir.vercel.app/embed?category=greetings" ...></iframe>
+<iframe src="https://irish-dictionary-app.vercel.app/embed?category=greetings" ...></iframe>
 ```
 
 Available categories: `family`, `greetings`, `emotions`, `conversation`, `food`, `home`, `time`, `nature`, `body`, `school`, `travel`, `numbers`, `colors`, `common`, `health`, `weather`, `sports`, `work`, `places`, `clothing`, `music`, `culture`
@@ -69,21 +69,21 @@ Language-agnostic. Works with any backend or mobile app.
 
 ```bash
 # Search (English or Irish, fada-insensitive)
-GET https://focloir.vercel.app/api/search?q=mother
-GET https://focloir.vercel.app/api/search?q=máthair
-GET https://focloir.vercel.app/api/search?q=mathair   # same result
+GET https://irish-dictionary-app.vercel.app/api/search?q=mother
+GET https://irish-dictionary-app.vercel.app/api/search?q=máthair
+GET https://irish-dictionary-app.vercel.app/api/search?q=mathair   # same result
 
 # Filter by category + limit
-GET https://focloir.vercel.app/api/search?q=hello&category=greetings&limit=10
+GET https://irish-dictionary-app.vercel.app/api/search?q=hello&category=greetings&limit=10
 
 # All categories with counts
-GET https://focloir.vercel.app/api/categories
+GET https://irish-dictionary-app.vercel.app/api/categories
 
 # Word of the day (deterministic per calendar day)
-GET https://focloir.vercel.app/api/word-of-the-day
+GET https://irish-dictionary-app.vercel.app/api/word-of-the-day
 
 # Single entry by ID
-GET https://focloir.vercel.app/api/entry/mathair
+GET https://irish-dictionary-app.vercel.app/api/entry/mathair
 ```
 
 **Response schema:**
@@ -142,7 +142,7 @@ console.log(`${wotd.irish} — ${wotd.english}`);
 
 ## Data
 
-**2,003 entries** across 22 categories:
+**27,755 entries** across 23 categories:
 
 | Category | Irish | Entries |
 |----------|-------|---------|
