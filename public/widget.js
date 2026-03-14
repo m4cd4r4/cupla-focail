@@ -1,9 +1,9 @@
 /**
- * Foclóir — Irish-English Dictionary Widget
+ * Cupla Focail — Irish-English Dictionary Widget
  * Drop this script onto any page to add a floating Irish dictionary button.
  *
  * Usage:
- *   <script src="https://focloir.vercel.app/widget.js" defer></script>
+ *   <script src="https://cuplafocail.ie/widget.js" defer></script>
  *
  * Options (via data attributes on the script tag):
  *   data-position="bottom-right"   (default) | "bottom-left"
@@ -15,7 +15,7 @@
 (function () {
   'use strict';
 
-  const BASE_URL = 'https://focloir.vercel.app';
+  const BASE_URL = 'https://cuplafocail.ie';
 
   // Read config from the script tag itself
   const script = document.currentScript || document.querySelector('script[src*="widget.js"]');
@@ -133,7 +133,7 @@
   btn.id = 'focloír-widget-btn';
   btn.setAttribute('aria-label', 'Open Irish Dictionary');
   btn.setAttribute('aria-expanded', 'false');
-  btn.setAttribute('title', 'Foclóir — Irish-English Dictionary');
+  btn.setAttribute('title', 'Cupla Focail — Irish-English Dictionary');
   btn.textContent = '🍀';
 
   const panel = document.createElement('div');

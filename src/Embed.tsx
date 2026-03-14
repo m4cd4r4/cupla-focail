@@ -36,7 +36,7 @@ export function Embed() {
       {/* Compact header */}
       <div className="flex items-center gap-2 px-4 py-3 border-b border-white/8 bg-dark-900/90 backdrop-blur sticky top-0 z-10">
         <span className="text-lg select-none">🍀</span>
-        <span className="font-semibold text-sm text-white">Foclóir</span>
+        <span className="font-semibold text-sm text-white">Cupla Focail</span>
         <span className="text-gray-600 text-xs ml-1">Irish-English Dictionary</span>
         <a
           href="/"
@@ -97,7 +97,7 @@ export function Embed() {
         <span className="text-xs text-gray-700">
           Powered by{' '}
           <a href="/" target="_top" className="text-shamrock-700 hover:text-shamrock-500 transition-colors">
-            focloir.vercel.app
+            cuplafocail.ie
           </a>
         </span>
         <span className="text-xs text-gray-700">{entries.length.toLocaleString()} entries</span>

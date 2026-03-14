@@ -37,7 +37,7 @@ export function App() {
           <div className="flex items-center gap-3">
             <span className="text-2xl select-none">🍀</span>
             <div>
-              <h1 className="text-lg font-bold text-white leading-none">Foclóir</h1>
+              <h1 className="text-lg font-bold text-white leading-none">Cupla Focail</h1>
               <p className="text-xs text-gray-500">Irish-English Dictionary</p>
             </div>
           </div>
@@ -165,7 +165,7 @@ export function App() {
       <footer className="border-t border-white/8 bg-dark-950/50">
         <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-sm text-gray-600">
-            🍀 Foclóir — MIT License · 27,755 entries
+            🍀 Cupla Focail — MIT License · 27,755 entries
           </p>
           <div className="flex items-center gap-4 text-sm">
             <a href="https://github.com/m4cd4r4/irish-dictionary-app" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-400 transition-colors">GitHub</a>

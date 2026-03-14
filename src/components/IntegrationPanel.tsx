@@ -7,7 +7,7 @@ const CODE: Record<Tab, { lang: string; label: string; code: string }> = {
     lang: 'html',
     label: 'Widget (1 line)',
     code: `<!-- Drop into any web page -->
-<script src="https://focloir.vercel.app/widget.js" defer></script>
+<script src="https://cuplafocail.ie/widget.js" defer></script>
 
 <!-- A shamrock button appears in the bottom-right corner.
      Click it to open the Irish dictionary panel. -->`,
@@ -17,7 +17,7 @@ const CODE: Record<Tab, { lang: string; label: string; code: string }> = {
     label: 'iframe Embed',
     code: `<!-- Embed the full dictionary UI anywhere -->
 <iframe
-  src="https://focloir.vercel.app/embed"
+  src="https://cuplafocail.ie/embed"
   width="100%"
   height="600"
   style="border:none;border-radius:12px;"
@@ -26,19 +26,19 @@ const CODE: Record<Tab, { lang: string; label: string; code: string }> = {
 ></iframe>
 
 <!-- Pass a category via query param -->
-<iframe src="https://focloir.vercel.app/embed?category=greetings" ... />`,
+<iframe src="https://cuplafocail.ie/embed?category=greetings" ... />`,
   },
   api: {
     lang: 'bash',
     label: 'REST API',
     code: `# Search
-GET https://focloir.vercel.app/api/search?q=mother
+GET https://cuplafocail.ie/api/search?q=mother
 
 # Filter by category
-GET https://focloir.vercel.app/api/search?q=hello&category=greetings&limit=10
+GET https://cuplafocail.ie/api/search?q=hello&category=greetings&limit=10
 
 # Word of the day
-GET https://focloir.vercel.app/api/word-of-the-day
+GET https://cuplafocail.ie/api/word-of-the-day
 
 # Response
 {

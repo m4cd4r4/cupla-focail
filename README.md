@@ -1,6 +1,6 @@
-# Foclóir — Irish-English Dictionary
+# Cupla Focail — Irish-English Dictionary
 
-> **Live:** https://irish-dictionary-app.vercel.app · **API:** https://irish-dictionary-app.vercel.app/api/search
+> **Live:** https://cuplafocail.ie · **API:** https://cuplafocail.ie/api/search
 
 A free, open-source Irish-English dictionary with **27,755 entries** across 23 categories. Built to be integrated into Irish language apps, learning tools, and messaging platforms.
 
@@ -13,7 +13,7 @@ A free, open-source Irish-English dictionary with **27,755 entries** across 23 c
 Drop a floating Irish dictionary button onto any web page:
 
 ```html
-<script src="https://irish-dictionary-app.vercel.app/widget.js" defer></script>
+<script src="https://cuplafocail.ie/widget.js" defer></script>
 ```
 
 A 🍀 button appears in the bottom-right corner. Click to open a full dictionary panel.
@@ -22,7 +22,7 @@ A 🍀 button appears in the bottom-right corner. Click to open a full dictionar
 
 ```html
 <script
-  src="https://irish-dictionary-app.vercel.app/widget.js"
+  src="https://cuplafocail.ie/widget.js"
   data-position="bottom-left"
   data-color="#16a34a"
   data-category="greetings"
@@ -44,7 +44,7 @@ Embed the full dictionary UI inside your app:
 
 ```html
 <iframe
-  src="https://irish-dictionary-app.vercel.app/embed"
+  src="https://cuplafocail.ie/embed"
   width="100%"
   height="600"
   style="border:none; border-radius:12px;"
@@ -56,7 +56,7 @@ Embed the full dictionary UI inside your app:
 Pre-select a category:
 
 ```html
-<iframe src="https://irish-dictionary-app.vercel.app/embed?category=greetings" ...></iframe>
+<iframe src="https://cuplafocail.ie/embed?category=greetings" ...></iframe>
 ```
 
 Available categories: `family`, `greetings`, `emotions`, `conversation`, `food`, `home`, `time`, `nature`, `body`, `school`, `travel`, `numbers`, `colors`, `common`, `health`, `weather`, `sports`, `work`, `places`, `clothing`, `music`, `culture`
@@ -69,21 +69,21 @@ Language-agnostic. Works with any backend or mobile app.
 
 ```bash
 # Search (English or Irish, fada-insensitive)
-GET https://irish-dictionary-app.vercel.app/api/search?q=mother
-GET https://irish-dictionary-app.vercel.app/api/search?q=máthair
-GET https://irish-dictionary-app.vercel.app/api/search?q=mathair   # same result
+GET https://cuplafocail.ie/api/search?q=mother
+GET https://cuplafocail.ie/api/search?q=máthair
+GET https://cuplafocail.ie/api/search?q=mathair   # same result
 
 # Filter by category + limit
-GET https://irish-dictionary-app.vercel.app/api/search?q=hello&category=greetings&limit=10
+GET https://cuplafocail.ie/api/search?q=hello&category=greetings&limit=10
 
 # All categories with counts
-GET https://irish-dictionary-app.vercel.app/api/categories
+GET https://cuplafocail.ie/api/categories
 
 # Word of the day (deterministic per calendar day)
-GET https://irish-dictionary-app.vercel.app/api/word-of-the-day
+GET https://cuplafocail.ie/api/word-of-the-day
 
 # Single entry by ID
-GET https://irish-dictionary-app.vercel.app/api/entry/mathair
+GET https://cuplafocail.ie/api/entry/mathair
 ```
 
 **Response schema:**
@@ -214,6 +214,28 @@ One-click deploy to Vercel (free):
 # Or via CLI
 npm install -g vercel
 vercel --prod
+```
+
+---
+
+## Domain & DNS Configuration
+
+**cuplafocail.ie** is registered at [hostingireland.ie](https://hostingireland.ie) and pointed to Vercel.
+
+### DNS Records (hostingireland.ie DNS Manager)
+
+| Name | TTL | Type | Record |
+|------|-----|------|--------|
+| `cuplafocail.ie` | 14400 | A | `76.76.21.21` |
+| `www.cuplafocail.ie` | 14400 | CNAME | `cname.vercel-dns.com` |
+
+The domain is assigned to the `irish-dictionary-app` Vercel project. Both `cuplafocail.ie` and `www.cuplafocail.ie` are configured.
+
+### Vercel Domain Assignment
+
+```bash
+# Domain is already assigned - to verify:
+npx vercel domains inspect cuplafocail.ie
 ```
 
 ---
