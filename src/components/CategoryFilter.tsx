@@ -1,6 +1,7 @@
 import type { DictionaryCategory } from '../data/irish-dictionary';
 
 const CATEGORIES: Array<{ key: DictionaryCategory; emoji: string; label: string }> = [
+  // Original 23
   { key: 'family',       emoji: '👨‍👩‍👧‍👦', label: 'Family' },
   { key: 'greetings',    emoji: '👋',     label: 'Greetings' },
   { key: 'emotions',     emoji: '💚',     label: 'Emotions' },
@@ -24,6 +25,19 @@ const CATEGORIES: Array<{ key: DictionaryCategory; emoji: string; label: string 
   { key: 'music',        emoji: '🎵',     label: 'Music' },
   { key: 'culture',      emoji: '🍀',     label: 'Culture' },
   { key: 'animals',      emoji: '🐾',     label: 'Animals' },
+  // New 12 — from WordNet/Wiktionary expansion
+  { key: 'plants',       emoji: '🌱',     label: 'Plants' },
+  { key: 'religion',     emoji: '⛪',     label: 'Religion' },
+  { key: 'mythology',    emoji: '🐉',     label: 'Mythology' },
+  { key: 'science',      emoji: '🔬',     label: 'Science' },
+  { key: 'technology',   emoji: '💻',     label: 'Technology' },
+  { key: 'agriculture',  emoji: '🌾',     label: 'Agriculture' },
+  { key: 'arts',         emoji: '🎭',     label: 'Arts' },
+  { key: 'geography',    emoji: '🗺️',    label: 'Geography' },
+  { key: 'law',          emoji: '⚖️',     label: 'Law' },
+  { key: 'politics',     emoji: '🏛️',    label: 'Politics' },
+  { key: 'military',     emoji: '🛡️',    label: 'Military' },
+  { key: 'business',     emoji: '📊',     label: 'Business' },
 ];
 
 interface Props {

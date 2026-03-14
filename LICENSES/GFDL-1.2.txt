@@ -1,0 +1,17 @@
+GNU Free Documentation License 1.2+
+
+This license applies to LSG Irish WordNet data (source: "lsg") in the
+Cupla Focail dictionary dataset.
+
+Full license text: https://www.gnu.org/licenses/old-licenses/fdl-1.2.html
+
+Summary:
+The GNU Free Documentation License is a copyleft license for free documentation,
+designed by the Free Software Foundation for the GNU Project.
+
+It is intended to guarantee your freedom to share and change free documents.
+
+Source: Lionra Seimeantach na Gaeilge (LSG) — Irish WordNet
+Repository: https://github.com/kscanne/wordnet-gaeilge
+Author: Kevin Scannell and contributors
+Website: https://cadhan.com/lsg/
