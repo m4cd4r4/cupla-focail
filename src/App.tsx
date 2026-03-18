@@ -69,7 +69,7 @@ export function App() {
       <header className="border-b border-white/8 bg-dark-900/80 backdrop-blur-xl sticky top-0 z-20">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-2xl select-none">🍀</span>
+            <img src="/chlann-logo.png" alt="Cupla Focail" className="w-8 h-8 select-none rounded-full" />
             <div>
               <h1 className="text-lg font-bold text-white leading-none">Cupla Focail</h1>
               <p className="text-xs text-gray-500">Irish-English Dictionary</p>
