@@ -73,7 +73,7 @@ export function App() {
       <header className="border-b border-white/8 bg-dark-900/80 backdrop-blur-xl sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
-            <img src="/chlann-logo.png" alt="" aria-hidden="true" className="w-8 h-8 select-none rounded-full shrink-0" />
+            <img src="/logo-ring.png" alt="" aria-hidden="true" className="w-8 h-8 select-none shrink-0" />
             <div className="min-w-0">
               <p className="text-lg font-bold text-white leading-none font-display">Cupla Focail</p>
               <p className="text-xs text-gray-500 truncate">
