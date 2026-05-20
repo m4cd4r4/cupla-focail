@@ -32,7 +32,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Georgia', 'serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
       },
       backgroundImage: {
         'celtic-gradient': 'linear-gradient(135deg, #0f172a 0%, #14532d 50%, #0f172a 100%)',

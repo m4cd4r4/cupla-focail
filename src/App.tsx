@@ -31,6 +31,7 @@ export function App() {
   const [metaLoaded, setMetaLoaded] = useState(false);
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchAnchorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -63,38 +64,73 @@ export function App() {
   }, [query, category, runSearch]);
 
   const showWotd = !query && !category;
+  const entryCount = metaLoaded ? total.toLocaleString() : '135,000+';
 
   return (
     <div className="min-h-screen bg-dark-900 flex flex-col">
       <header className="border-b border-white/8 bg-dark-900/80 backdrop-blur-xl sticky top-0 z-20">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src="/chlann-logo.png" alt="Cupla Focail" className="w-8 h-8 select-none rounded-full" />
-            <div>
-              <h1 className="text-lg font-bold text-white leading-none">Cupla Focail</h1>
-              <p className="text-xs text-gray-500">Irish-English Dictionary</p>
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <img src="/chlann-logo.png" alt="" aria-hidden="true" className="w-8 h-8 select-none rounded-full shrink-0" />
+            <div className="min-w-0">
+              <p className="text-lg font-bold text-white leading-none font-display">Cupla Focail</p>
+              <p className="text-xs text-gray-500 truncate">Foclóir Gaeilge-Béarla</p>
             </div>
           </div>
-          <a href="https://github.com/m4cd4r4/cupla-focail" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-sm text-gray-400 hover:text-gray-200 transition-colors">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-            </svg>
-            GitHub
-          </a>
+          <nav className="flex items-center gap-2">
+            <a
+              href="/api/search?q=hello"
+              className="hidden sm:inline-flex items-center px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-gray-200 hover:bg-white/5 transition-colors"
+            >
+              Docs
+            </a>
+            <a
+              href="https://github.com/m4cd4r4/cupla-focail"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-sm text-gray-400 hover:text-gray-200 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              GitHub
+            </a>
+          </nav>
         </div>
       </header>
 
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-shamrock-900/20 to-transparent pointer-events-none" />
-        <div className="max-w-3xl mx-auto px-4 py-12 relative">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Irish-English Dictionary</h2>
-            <p className="text-gray-400 text-lg">
-              {metaLoaded ? total.toLocaleString() : '135,000+'} entries · Fada-insensitive search · Free &amp; open source
-            </p>
+      {/* HERO — Word of the Day leads. The Irish word is the headline. */}
+      {showWotd && wotd && (
+        <section className="relative overflow-hidden" aria-labelledby="hero-eyebrow">
+          <div className="absolute inset-0 bg-gradient-to-b from-shamrock-900/15 via-transparent to-transparent pointer-events-none" />
+          <div className="max-w-5xl mx-auto px-4 pt-10 pb-6 sm:pt-14 sm:pb-8 relative animate-fade-in">
+            <p id="hero-eyebrow" className="sr-only">Featured Irish word of the day</p>
+            <WordOfTheDay entry={wotd} variant="hero" />
           </div>
-          <SearchInput value={query} onChange={setQuery} autoFocus />
+        </section>
+      )}
+
+      {/* Search + meta. Sticks under the hero (or replaces it when results are showing). */}
+      <section className="relative">
+        <div className="max-w-3xl mx-auto px-4 pt-4 pb-8 sm:pt-6 sm:pb-10" ref={searchAnchorRef}>
+          {!showWotd && (
+            <div className="text-center mb-6 animate-fade-in">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 font-display">Irish-English Dictionary</h2>
+              <p className="text-gray-400 text-sm sm:text-base">
+                {entryCount} entries · Type with or without fadas · Free forever
+              </p>
+            </div>
+          )}
+          {showWotd && (
+            <div className="text-center mb-4">
+              <p className="text-sm text-gray-500">
+                <span lang="ga" className="text-shamrock-400/80">Foclóir oscailte. Saor in aisce.</span>
+                <span className="mx-2 text-gray-700">·</span>
+                {entryCount} entries
+              </p>
+            </div>
+          )}
+          <SearchInput value={query} onChange={setQuery} autoFocus={!showWotd} />
           {searching && <p className="text-center text-xs text-gray-600 mt-3 animate-pulse">Searching...</p>}
         </div>
       </section>
@@ -103,12 +139,6 @@ export function App() {
         <div className="mb-6">
           <CategoryFilter selected={category} onChange={setCategory} counts={counts} />
         </div>
-
-        {showWotd && wotd && (
-          <div className="mb-8 animate-fade-in">
-            <WordOfTheDay entry={wotd} />
-          </div>
-        )}
 
         {results && (query || category) && (
           <div>
@@ -138,25 +168,12 @@ export function App() {
         )}
 
         {showWotd && metaLoaded && (
-          <section className="mt-16">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-white mb-2">Integrate Anywhere</h2>
-              <p className="text-gray-400">Add the Irish dictionary to your app in seconds</p>
+          <section className="mt-12" aria-labelledby="integrate-heading">
+            <div className="text-center mb-6">
+              <h2 id="integrate-heading" className="text-2xl font-bold text-white mb-2 font-display">Integrate Anywhere</h2>
+              <p className="text-gray-400">One line. Any framework. No build step.</p>
             </div>
             <IntegrationPanel />
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-              {[
-                { icon: '📚', title: '135k Entries', desc: '4 open data sources: hand-curated, LSG WordNet, Wiktionary, BuNaMo' },
-                { icon: '🔍', title: 'Fada-Insensitive', desc: 'Search "mathair" or "máthair" — both return the same results' },
-                { icon: '🌐', title: 'Any Framework', desc: 'Widget, iframe embed, REST API, or npm package' },
-              ].map(({ icon, title, desc }) => (
-                <div key={title} className="glass rounded-xl p-5 text-center">
-                  <div className="text-3xl mb-3">{icon}</div>
-                  <h3 className="font-semibold text-gray-200 mb-1">{title}</h3>
-                  <p className="text-sm text-gray-500">{desc}</p>
-                </div>
-              ))}
-            </div>
           </section>
         )}
       </main>
@@ -164,7 +181,7 @@ export function App() {
       <footer className="border-t border-white/8 bg-dark-950/50">
         <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-sm text-gray-600">
-            🍀 Cupla Focail · MIT License · {metaLoaded ? total.toLocaleString() : '135,000+'} entries
+            <span aria-hidden="true">🍀</span> Cupla Focail · MIT License · {entryCount} entries
           </p>
           <div className="flex items-center gap-4 text-sm">
             <a href="https://github.com/m4cd4r4/cupla-focail" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-400 transition-colors">GitHub</a>

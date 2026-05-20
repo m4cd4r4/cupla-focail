@@ -48,30 +48,36 @@ interface Props {
 
 export function CategoryFilter({ selected, onChange, counts }: Props) {
   return (
-    <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin" role="tablist" aria-label="Filter by category">
-      <button
-        role="tab"
-        aria-selected={selected === null}
-        onClick={() => onChange(null)}
-        className={`chip ${selected === null ? 'chip-active' : 'chip-inactive'}`}
+    <div className="relative">
+      <div
+        className="flex flex-wrap gap-2 pb-1"
+        role="tablist"
+        aria-label="Filter by category"
       >
-        All words
-      </button>
-      {CATEGORIES.map(({ key, emoji, label }) => {
-        const count = counts[key] ?? 0;
-        if (count === 0) return null;
-        return (
-          <button
-            key={key}
-            role="tab"
-            aria-selected={selected === key}
-            onClick={() => onChange(selected === key ? null : key)}
-            className={`chip ${selected === key ? 'chip-active' : 'chip-inactive'}`}
-          >
-            {emoji} {label}
-          </button>
-        );
-      })}
+        <button
+          role="tab"
+          aria-selected={selected === null}
+          onClick={() => onChange(null)}
+          className={`chip ${selected === null ? 'chip-active' : 'chip-inactive'}`}
+        >
+          All words
+        </button>
+        {CATEGORIES.map(({ key, emoji, label }) => {
+          const count = counts[key] ?? 0;
+          if (count === 0) return null;
+          return (
+            <button
+              key={key}
+              role="tab"
+              aria-selected={selected === key}
+              onClick={() => onChange(selected === key ? null : key)}
+              className={`chip ${selected === key ? 'chip-active' : 'chip-inactive'}`}
+            >
+              {emoji} {label}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
