@@ -1,43 +1,44 @@
 import type { DictionaryCategory } from '../data/irish-dictionary';
+import { useLang } from '../lang';
 
-const CATEGORIES: Array<{ key: DictionaryCategory; emoji: string; label: string }> = [
+const CATEGORIES: Array<{ key: DictionaryCategory; emoji: string; en: string; ga: string }> = [
   // Original 23
-  { key: 'family',       emoji: '👨‍👩‍👧‍👦', label: 'Family' },
-  { key: 'greetings',    emoji: '👋',     label: 'Greetings' },
-  { key: 'emotions',     emoji: '💚',     label: 'Emotions' },
-  { key: 'conversation', emoji: '💬',     label: 'Conversation' },
-  { key: 'food',         emoji: '🍽️',    label: 'Food' },
-  { key: 'home',         emoji: '🏠',     label: 'Home' },
-  { key: 'time',         emoji: '🕐',     label: 'Time' },
-  { key: 'nature',       emoji: '🌿',     label: 'Nature' },
-  { key: 'body',         emoji: '🫀',     label: 'Body' },
-  { key: 'school',       emoji: '📚',     label: 'School' },
-  { key: 'travel',       emoji: '✈️',     label: 'Travel' },
-  { key: 'numbers',      emoji: '🔢',     label: 'Numbers' },
-  { key: 'colors',       emoji: '🎨',     label: 'Colors' },
-  { key: 'common',       emoji: '📝',     label: 'Common' },
-  { key: 'health',       emoji: '🏥',     label: 'Health' },
-  { key: 'weather',      emoji: '🌦️',    label: 'Weather' },
-  { key: 'sports',       emoji: '⚽',     label: 'Sports' },
-  { key: 'work',         emoji: '💼',     label: 'Work' },
-  { key: 'places',       emoji: '📍',     label: 'Places' },
-  { key: 'clothing',     emoji: '👗',     label: 'Clothing' },
-  { key: 'music',        emoji: '🎵',     label: 'Music' },
-  { key: 'culture',      emoji: '🍀',     label: 'Culture' },
-  { key: 'animals',      emoji: '🐾',     label: 'Animals' },
+  { key: 'family',       emoji: '👨‍👩‍👧‍👦', en: 'Family',       ga: 'Teaghlach' },
+  { key: 'greetings',    emoji: '👋',     en: 'Greetings',    ga: 'Beannachtaí' },
+  { key: 'emotions',     emoji: '💚',     en: 'Emotions',     ga: 'Mothúcháin' },
+  { key: 'conversation', emoji: '💬',     en: 'Conversation', ga: 'Comhrá' },
+  { key: 'food',         emoji: '🍽️',    en: 'Food',         ga: 'Bia' },
+  { key: 'home',         emoji: '🏠',     en: 'Home',         ga: 'Baile' },
+  { key: 'time',         emoji: '🕐',     en: 'Time',         ga: 'Am' },
+  { key: 'nature',       emoji: '🌿',     en: 'Nature',       ga: 'Dúlra' },
+  { key: 'body',         emoji: '🫀',     en: 'Body',         ga: 'Corp' },
+  { key: 'school',       emoji: '📚',     en: 'School',       ga: 'Scoil' },
+  { key: 'travel',       emoji: '✈️',     en: 'Travel',       ga: 'Taisteal' },
+  { key: 'numbers',      emoji: '🔢',     en: 'Numbers',      ga: 'Uimhreacha' },
+  { key: 'colors',       emoji: '🎨',     en: 'Colors',       ga: 'Dathanna' },
+  { key: 'common',       emoji: '📝',     en: 'Common',       ga: 'Coitianta' },
+  { key: 'health',       emoji: '🏥',     en: 'Health',       ga: 'Sláinte' },
+  { key: 'weather',      emoji: '🌦️',    en: 'Weather',      ga: 'Aimsir' },
+  { key: 'sports',       emoji: '⚽',     en: 'Sports',       ga: 'Spóirt' },
+  { key: 'work',         emoji: '💼',     en: 'Work',         ga: 'Obair' },
+  { key: 'places',       emoji: '📍',     en: 'Places',       ga: 'Áiteanna' },
+  { key: 'clothing',     emoji: '👗',     en: 'Clothing',     ga: 'Éadaí' },
+  { key: 'music',        emoji: '🎵',     en: 'Music',        ga: 'Ceol' },
+  { key: 'culture',      emoji: '🍀',     en: 'Culture',      ga: 'Cultúr' },
+  { key: 'animals',      emoji: '🐾',     en: 'Animals',      ga: 'Ainmhithe' },
   // New 12 — from WordNet/Wiktionary expansion
-  { key: 'plants',       emoji: '🌱',     label: 'Plants' },
-  { key: 'religion',     emoji: '⛪',     label: 'Religion' },
-  { key: 'mythology',    emoji: '🐉',     label: 'Mythology' },
-  { key: 'science',      emoji: '🔬',     label: 'Science' },
-  { key: 'technology',   emoji: '💻',     label: 'Technology' },
-  { key: 'agriculture',  emoji: '🌾',     label: 'Agriculture' },
-  { key: 'arts',         emoji: '🎭',     label: 'Arts' },
-  { key: 'geography',    emoji: '🗺️',    label: 'Geography' },
-  { key: 'law',          emoji: '⚖️',     label: 'Law' },
-  { key: 'politics',     emoji: '🏛️',    label: 'Politics' },
-  { key: 'military',     emoji: '🛡️',    label: 'Military' },
-  { key: 'business',     emoji: '📊',     label: 'Business' },
+  { key: 'plants',       emoji: '🌱',     en: 'Plants',       ga: 'Plandaí' },
+  { key: 'religion',     emoji: '⛪',     en: 'Religion',     ga: 'Creideamh' },
+  { key: 'mythology',    emoji: '🐉',     en: 'Mythology',    ga: 'Miotaseolaíocht' },
+  { key: 'science',      emoji: '🔬',     en: 'Science',      ga: 'Eolaíocht' },
+  { key: 'technology',   emoji: '💻',     en: 'Technology',   ga: 'Teicneolaíocht' },
+  { key: 'agriculture',  emoji: '🌾',     en: 'Agriculture',  ga: 'Talmhaíocht' },
+  { key: 'arts',         emoji: '🎭',     en: 'Arts',         ga: 'Na hEalaíona' },
+  { key: 'geography',    emoji: '🗺️',    en: 'Geography',    ga: 'Tíreolaíocht' },
+  { key: 'law',          emoji: '⚖️',     en: 'Law',          ga: 'Dlí' },
+  { key: 'politics',     emoji: '🏛️',    en: 'Politics',     ga: 'Polaitíocht' },
+  { key: 'military',     emoji: '🛡️',    en: 'Military',     ga: 'Míleata' },
+  { key: 'business',     emoji: '📊',     en: 'Business',     ga: 'Gnó' },
 ];
 
 interface Props {
@@ -47,12 +48,14 @@ interface Props {
 }
 
 export function CategoryFilter({ selected, onChange, counts }: Props) {
+  const { t, lang } = useLang();
+
   return (
     <div className="relative">
       <div
         className="flex flex-wrap gap-2 pb-1"
         role="tablist"
-        aria-label="Filter by category"
+        aria-label={t('Filter by category', 'Scag de réir catagóire')}
       >
         <button
           role="tab"
@@ -60,11 +63,12 @@ export function CategoryFilter({ selected, onChange, counts }: Props) {
           onClick={() => onChange(null)}
           className={`chip ${selected === null ? 'chip-active' : 'chip-inactive'}`}
         >
-          All words
+          {t('All words', 'Gach focal')}
         </button>
-        {CATEGORIES.map(({ key, emoji, label }) => {
+        {CATEGORIES.map(({ key, emoji, en, ga }) => {
           const count = counts[key] ?? 0;
           if (count === 0) return null;
+          const label = lang === 'ga' ? ga : en;
           return (
             <button
               key={key}
@@ -72,6 +76,7 @@ export function CategoryFilter({ selected, onChange, counts }: Props) {
               aria-selected={selected === key}
               onClick={() => onChange(selected === key ? null : key)}
               className={`chip ${selected === key ? 'chip-active' : 'chip-inactive'}`}
+              lang={lang === 'ga' ? 'ga' : 'en'}
             >
               {emoji} {label}
             </button>
